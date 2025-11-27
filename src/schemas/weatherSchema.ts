@@ -1,61 +1,100 @@
-import { z } from "zod";
+import { z } from "zod"
 
-const CoordSchema = z.object({
-  lon: z.number(),
+export const weatherSchema = z.object({
   lat: z.number(),
-});
-
-const WeatherItemSchema = z.object({
-  id: z.number(),
-  main: z.string(),
-  description: z.string(),
-  icon: z.string(),
-});
-
-const MainSchema = z.object({
-  temp: z.number(),
-  feels_like: z.number(),
-  temp_min: z.number(),
-  temp_max: z.number(),
-  pressure: z.number(),
-  humidity: z.number(),
-  sea_level: z.number(),
-  grnd_level: z.number(),
-});
-
-const WindSchema = z.object({
-  speed: z.number(),
-  deg: z.number(),
-  // gust optional hota hai, is response me nahi tha
-  gust: z.number().optional(),
-});
-
-const CloudsSchema = z.object({
-  all: z.number(),
-});
-
-const SysSchema = z.object({
-  type: z.number(),
-  id: z.number(),
-  country: z.string(),
-  sunrise: z.number(),
-  sunset: z.number(),
-});
-
-export const WeatherResponseSchema = z.object({
-  coord: CoordSchema,
-  weather: z.array(WeatherItemSchema),
-  base: z.string(),
-  main: MainSchema,
-  visibility: z.number(),
-  wind: WindSchema,
-  clouds: CloudsSchema,
-  dt: z.number(),
-  sys: SysSchema,
-  timezone: z.number(),
-  id: z.number(),
-  name: z.string(),
-  cod: z.number(),
-});
-
-export type WeatherResponse = z.infer<typeof WeatherResponseSchema>;
+  lon: z.number(),
+  timezone: z.string(),
+  timezone_offset: z.number(),
+  current: z.object({
+    dt: z.number(),
+    sunrise: z.number(),
+    sunset: z.number(),
+    temp: z.number(),
+    feels_like: z.number(),
+    pressure: z.number(),
+    humidity: z.number(),
+    dew_point: z.number(),
+    uvi: z.number(),
+    clouds: z.number(),
+    visibility: z.number(),
+    wind_speed: z.number(),
+    wind_deg: z.number(),
+    wind_gust: z.number().optional(),
+    weather: z.array(
+      z.object({
+        id: z.number(),
+        main: z.string(),
+        description: z.string(),
+        icon: z.string(),
+      })
+    ),
+  }),
+  hourly: z.array(
+    z.object({
+      dt: z.number(),
+      temp: z.number(),
+      feels_like: z.number(),
+      pressure: z.number(),
+      humidity: z.number(),
+      dew_point: z.number(),
+      uvi: z.number(),
+      clouds: z.number(),
+      visibility: z.number(),
+      wind_speed: z.number(),
+      wind_deg: z.number(),
+      wind_gust: z.number(),
+      weather: z.array(
+        z.object({
+          id: z.number(),
+          main: z.string(),
+          description: z.string(),
+          icon: z.string(),
+        })
+      ),
+      pop: z.number(),
+    })
+  ),
+  daily: z.array(
+    z.object({
+      dt: z.number(),
+      sunrise: z.number(),
+      sunset: z.number(),
+      moonrise: z.number(),
+      moonset: z.number(),
+      moon_phase: z.number(),
+      summary: z.string(),
+      temp: z.object({
+        day: z.number(),
+        min: z.number(),
+        max: z.number(),
+        night: z.number(),
+        eve: z.number(),
+        morn: z.number(),
+      }),
+      feels_like: z.object({
+        day: z.number(),
+        night: z.number(),
+        eve: z.number(),
+        morn: z.number(),
+      }),
+      pressure: z.number(),
+      humidity: z.number(),
+      dew_point: z.number(),
+      wind_speed: z.number(),
+      wind_deg: z.number(),
+      wind_gust: z.number(),
+      weather: z.array(
+        z.object({
+          id: z.number(),
+          main: z.string(),
+          description: z.string(),
+          icon: z.string(),
+        })
+      ),
+      clouds: z.number(),
+      pop: z.number(),
+      rain: z.number().optional(),
+      uvi: z.number(),
+    })
+  ),
+})
