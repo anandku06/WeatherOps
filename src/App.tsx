@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getWeather } from "./api";
 import DailyForecast from "./components/cards/DailyForecast";
+import HourlyForecast from "./components/cards/HourlyForecast";
 
 function App() {
   const { data } = useQuery({
@@ -11,9 +12,8 @@ function App() {
   return (
     <div className="flex flex-col gap-8">
       {/* <Card title="System">{JSON.stringify(data)}</Card> */}
-      {/* <Card title="Weather">{JSON.stringify(data?.weather)}</Card> */}
+      <HourlyForecast />
       <DailyForecast />
-      {/* {JSON.stringify(data)} */}
     </div>
   );
 }
