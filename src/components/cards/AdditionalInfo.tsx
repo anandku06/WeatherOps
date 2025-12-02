@@ -1,8 +1,6 @@
-import React from "react";
 import Card from "./Card";
 import { getWeather } from "../../api";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { number } from "zod";
 
 type Props = {};
 
@@ -37,7 +35,7 @@ function FormatComponent({ value, num }: { value: string; num: number }) {
     });
   }
 
-  return number;
+  return num;
 }
 
 const rows = [
