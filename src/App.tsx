@@ -1,11 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { getWeather } from "./api";
 import DailyForecast from "./components/cards/DailyForecast";
 import HourlyForecast from "./components/cards/HourlyForecast";
 import CurrentWeather from "./components/cards/CurrentWeather";
+import AdditionalInfo from "./components/cards/AdditionalInfo";
 
 function App() {
-  const { data } = useQuery({
+  const { data } = useSuspenseQuery({
     queryKey: ["weather"],
     queryFn: () => getWeather({ lat: 37.7749, long: -122.4194 }),
   });
@@ -15,6 +16,7 @@ function App() {
       <CurrentWeather />
       <HourlyForecast />
       <DailyForecast />
+      <AdditionalInfo />
     </div>
   );
 }
