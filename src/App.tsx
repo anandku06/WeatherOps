@@ -4,6 +4,7 @@ import DailyForecast from "./components/cards/DailyForecast";
 import HourlyForecast from "./components/cards/HourlyForecast";
 import CurrentWeather from "./components/cards/CurrentWeather";
 import AdditionalInfo from "./components/cards/AdditionalInfo";
+import Map from "./components/Map";
 
 function App() {
   const { data } = useSuspenseQuery({
@@ -17,6 +18,7 @@ function App() {
       <HourlyForecast />
       <DailyForecast />
       <AdditionalInfo />
+      <Map />
     </div>
   );
 }
