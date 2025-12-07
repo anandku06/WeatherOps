@@ -7,11 +7,6 @@ import AdditionalInfo from "./components/cards/AdditionalInfo";
 import Map from "./components/Map";
 
 function App() {
-  const { data } = useSuspenseQuery({
-    queryKey: ["weather"],
-    queryFn: () => getWeather({ lat: 37.7749, long: -122.4194 }),
-  });
-
   return (
     <div className="flex flex-col gap-8">
       <CurrentWeather />
