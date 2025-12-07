@@ -8,13 +8,16 @@ import Uv from "/src/assets/uv.svg?react";
 import Wind from "/src/assets/wind.svg?react";
 import Pressure from "/src/assets/pressure.svg?react";
 import UpArrow from "/src/assets/uparrow.svg?react";
+import type { Coords } from "../../types";
 
-type Props = {};
+type Props = {
+  coords: Coords;
+};
 
-const AdditionalInfo = (props: Props) => {
+const AdditionalInfo = ({ coords }: Props) => {
   const { data } = useSuspenseQuery({
     queryKey: ["weather"],
-    queryFn: () => getWeather({ lat: 37.7749, long: -122.4194 }),
+    queryFn: () => getWeather({ lat: coords.lat, long: coords.long }),
   });
   return (
     <Card
@@ -46,7 +49,12 @@ function FormatComponent({ value, num }: { value: string; num: number }) {
   }
 
   if (value === "wind_deg")
-    return <UpArrow className="size-8 invert" style={{ transform: `rotate(${num}deg)` }} />;
+    return (
+      <UpArrow
+        className="size-8 invert"
+        style={{ transform: `rotate(${num}deg)` }}
+      />
+    );
 
   return num;
 }
