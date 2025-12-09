@@ -12,9 +12,13 @@ function App() {
     long: -122.4194,
   });
 
+  const onMapClick = (newCoords: Coords) => {
+    setCoords(newCoords);
+  };
+
   return (
     <div className="flex flex-col gap-8">
-      <Map />
+      <Map coords={coords} onMapClick={onMapClick} />
       <CurrentWeather coords={coords} />
       <HourlyForecast coords={coords} />
       <DailyForecast coords={coords} />

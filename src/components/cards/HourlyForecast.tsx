@@ -12,7 +12,7 @@ type Props = {
 
 const HourlyForecast = ({ coords }: Props) => {
   const { data } = useSuspenseQuery({
-    queryKey: ["weather"],
+    queryKey: ["weather", coords],
     queryFn: () => getWeather({ lat: coords.lat, long: coords.long }),
   });
   return (
