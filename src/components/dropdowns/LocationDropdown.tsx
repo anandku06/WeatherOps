@@ -1,4 +1,4 @@
-import React from "react";
+import React, { type Dispatch, type SetStateAction } from "react";
 import {
   Select,
   SelectContent,
@@ -7,21 +7,24 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-type Props = {};
+type Props = {
+  location: string;
+  setLocation: Dispatch<SetStateAction<string>>;
+};
 
-export default function LocationDropdown({}: Props) {
+export default function LocationDropdown({ location, setLocation }: Props) {
   return (
     <div>
-      <Select>
+      <Select value={location} onValueChange={(value) => setLocation(value)}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Theme" />
         </SelectTrigger>
         <SelectContent className="z-1001">
-            {locations.map((city, i) => (
-                <SelectItem key={i} value={city}>
-                    {city}
-                </SelectItem>
-            ))}
+          {locations.map((city, i) => (
+            <SelectItem key={i} value={city}>
+              {city}
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
     </div>
