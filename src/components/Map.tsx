@@ -1,9 +1,8 @@
-import React from "react";
+import "leaflet/dist/leaflet.css";
+import { useMap } from "react-leaflet";
 import { MapContainer } from "react-leaflet/MapContainer";
 import { Marker } from "react-leaflet/Marker";
-import "leaflet/dist/leaflet.css";
 import { TileLayer } from "react-leaflet/TileLayer";
-import { useMap } from "react-leaflet";
 import type { Coords } from "../types";
 
 type Props = {
@@ -17,6 +16,7 @@ export default function Map({ coords, onMapClick }: Props) {
   return (
     <>
       <MapContainer
+        key={`${coords.lat},${coords.long}`}
         center={[lat, long]}
         zoom={5}
         style={{ width: "1000px", height: "500px" }}

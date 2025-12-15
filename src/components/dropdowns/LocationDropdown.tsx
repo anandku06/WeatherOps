@@ -1,4 +1,3 @@
-import React, { type Dispatch, type SetStateAction } from "react";
 import {
   Select,
   SelectContent,
@@ -6,6 +5,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { type Dispatch, type SetStateAction } from "react";
 
 type Props = {
   location: string;

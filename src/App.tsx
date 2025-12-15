@@ -1,19 +1,16 @@
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { getGeoCode } from "./api";
+import AdditionalInfo from "./components/cards/AdditionalInfo";
+import CurrentWeather from "./components/cards/CurrentWeather";
 import DailyForecast from "./components/cards/DailyForecast";
 import HourlyForecast from "./components/cards/HourlyForecast";
-import CurrentWeather from "./components/cards/CurrentWeather";
-import AdditionalInfo from "./components/cards/AdditionalInfo";
-import Map from "./components/Map";
-import { useState } from "react";
-import type { Coords } from "./types";
 import LocationDropdown from "./components/dropdowns/LocationDropdown";
-import { useQuery } from "@tanstack/react-query";
-import { getGeoCode } from "./api";
+import Map from "./components/Map";
+import type { Coords } from "./types";
 
 function App() {
-  const [coordinates, setCoordinates] = useState<Coords>({
-    lat: 37.7749,
-    long: -122.4194,
-  });
+  const [coordinates, setCoordinates] = useState<Coords>({ lat: 0, long: 0 });
 
   const [location, setLocation] = useState<string>("Tokyo");
   const { data: geoCodeData } = useQuery({
@@ -30,6 +27,8 @@ function App() {
     location === "custom"
       ? coordinates
       : { lat: geoCodeData?.[0].lat ?? 0, long: geoCodeData?.[0].lon ?? 0 };
+
+      console.log("Rendering App with coords:", coords);
 
   return (
     <div className="flex flex-col gap-8">
