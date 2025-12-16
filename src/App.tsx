@@ -28,8 +28,6 @@ function App() {
       ? coordinates
       : { lat: geoCodeData?.[0].lat ?? 0, long: geoCodeData?.[0].lon ?? 0 };
 
-      console.log("Rendering App with coords:", coords);
-
   return (
     <div className="flex flex-col gap-8">
       <LocationDropdown location={location} setLocation={setLocation} />
