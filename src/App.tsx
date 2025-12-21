@@ -8,6 +8,7 @@ import HourlyForecast from "./components/cards/HourlyForecast";
 import LocationDropdown from "./components/dropdowns/LocationDropdown";
 import Map from "./components/Map";
 import type { Coords } from "./types";
+import MapTypeDropdown from "./components/dropdowns/MapTypeDropdown";
 
 function App() {
   const [coordinates, setCoordinates] = useState<Coords>({ lat: 0, long: 0 });
@@ -31,6 +32,7 @@ function App() {
   return (
     <div className="flex flex-col gap-8">
       <LocationDropdown location={location} setLocation={setLocation} />
+      <MapTypeDropdown mapType={""} setMapType={() => {}} />
       <Map coords={coords} onMapClick={onMapClick} />
       <CurrentWeather coords={coords} />
       <HourlyForecast coords={coords} />
