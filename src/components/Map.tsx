@@ -10,9 +10,10 @@ const API_key = import.meta.env.VITE_WEATHER_API_KEY;
 type Props = {
   coords: Coords;
   onMapClick: (newCoords: Coords) => void;
+  mapType: string;
 };
 
-export default function Map({ coords, onMapClick }: Props) {
+export default function Map({ coords, onMapClick, mapType }: Props) {
   const { lat, long } = coords;
 
   return (
@@ -28,7 +29,7 @@ export default function Map({ coords, onMapClick }: Props) {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <TileLayer
-          url={`https://tile.openweathermap.org/map/{layer}/{z}/{x}/{y}.png?appid=${API_key}`}
+          url={`https://tile.openweathermap.org/map/${mapType}/{z}/{x}/{y}.png?appid=${API_key}`}
         />
         <Marker position={[lat, long]} />
       </MapContainer>

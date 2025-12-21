@@ -37,7 +37,7 @@ function App() {
         <LocationDropdown location={location} setLocation={setLocation} />
         <MapTypeDropdown mapType={mapType} setMapType={setMapType} />
       </div>
-      <Map coords={coords} onMapClick={onMapClick} />
+      <Map coords={coords} onMapClick={onMapClick} mapType={mapType} />
       <CurrentWeather coords={coords} />
       <HourlyForecast coords={coords} />
       <DailyForecast coords={coords} />
