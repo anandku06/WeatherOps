@@ -14,6 +14,8 @@ function App() {
   const [coordinates, setCoordinates] = useState<Coords>({ lat: 0, long: 0 });
 
   const [location, setLocation] = useState<string>("Tokyo");
+  const [mapType, setMapType] = useState<string>("clouds_new");
+
   const { data: geoCodeData } = useQuery({
     queryKey: ["geocode", location],
     queryFn: () => getGeoCode(location),
@@ -31,8 +33,10 @@ function App() {
 
   return (
     <div className="flex flex-col gap-8">
-      <LocationDropdown location={location} setLocation={setLocation} />
-      <MapTypeDropdown mapType={""} setMapType={() => {}} />
+      <div className="flex gap-8">
+        <LocationDropdown location={location} setLocation={setLocation} />
+        <MapTypeDropdown mapType={mapType} setMapType={setMapType} />
+      </div>
       <Map coords={coords} onMapClick={onMapClick} />
       <CurrentWeather coords={coords} />
       <HourlyForecast coords={coords} />

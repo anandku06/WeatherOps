@@ -17,7 +17,7 @@ export default function LocationDropdown({ location, setLocation }: Props) {
     <div>
       <Select value={location} onValueChange={(value) => setLocation(value)}>
         <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Theme" />
+          <SelectValue placeholder="Locations" />
         </SelectTrigger>
         <SelectContent className="z-1001">
           {locations.map((city, i) => (
