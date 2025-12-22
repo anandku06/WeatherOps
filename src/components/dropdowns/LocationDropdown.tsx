@@ -21,7 +21,7 @@ export default function LocationDropdown({ location, setLocation }: Props) {
         </SelectTrigger>
         <SelectContent className="z-1001">
           {locations.map((city, i) => (
-            <SelectItem key={i} value={city}>
+            <SelectItem key={i} value={city} className="capitalize">
               {city}
             </SelectItem>
           ))}
