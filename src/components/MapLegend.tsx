@@ -19,6 +19,11 @@ export default function MapLegend({ mapType }: Props) {
         <div className='w-full h-6 rounded-xl border border-accent/70' style={{
             background: `linear-gradient(to right, ${gradStops})`
         }} />
+
+        <div className='flex justify-between text-xs text-foreground'>
+            <span>{data.stops[0].value} {data.unit}</span>
+            <span>{data.stops[data.stops.length - 1].value} {data.unit}</span>
+        </div>
     </div>
   )
 }
