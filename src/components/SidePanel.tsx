@@ -4,6 +4,8 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import React, { Suspense } from "react";
 import Card from "./cards/Card";
 import { Slider } from "./ui/slider";
+import clsx from "clsx";
+import { ca } from "zod/locales";
 
 type Props = {
   coords: Coords;
@@ -35,6 +37,29 @@ function AirPollution({ coords }: Props) {
         const pollutant =
           airQualityRanges[key.toUpperCase() as keyof AirQualityRanges];
         const max = Math.max(pollutant["Very Poor"].min, value);
+        const currentLevel = (() => {
+          for (const [level, range] of Object.entries(pollutant)) {
+            if (value >= range.min && (range.max === null || value < range.max))
+              return level;
+          }
+          return "Very Poor";
+        })();
+
+        const qualityColor = (() => {
+          switch (currentLevel) {
+            case "Good":
+              return "bg-green-500";
+            case "Fair":
+              return "bg-lime-500";
+            case "Moderate":
+              return "bg-yellow-500";
+            case "Poor":
+              return "bg-orange-500";
+            case "Very Poor":
+              return "bg-red-500";
+          }
+        })();
+
         return (
           <Card
             key={key}
@@ -46,9 +71,20 @@ function AirPollution({ coords }: Props) {
               <span className="text-lg font-semibold">{value}</span>
             </div>
             <Slider disabled min={0} max={max} value={[value]} />
-            <div className="flex justify-between text-xs">
-              <p>0</p>
-              <p>{max}</p>
+
+            <div className="flex justify-between">
+              {Object.keys(pollutant).map((quality) => (
+                <span
+                  className={clsx(
+                    "px-2 py-1 rounded-md text-xs font-medium",
+                    quality === currentLevel
+                      ? qualityColor
+                      : "bg-muted text-muted-foreground"
+                  )}
+                >
+                  {quality}
+                </span>
+              ))}
             </div>
           </Card>
         );
