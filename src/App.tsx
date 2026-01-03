@@ -22,7 +22,7 @@ function App() {
 
   const [location, setLocation] = useState<string>("Tokyo");
   const [mapType, setMapType] = useState<string>("clouds_new");
-  const [isSidePanelOpen, setIsSidePanelOpen] = useState<boolean>(false);
+  const [isSidePanelOpen, setIsSidePanelOpen] = useState<boolean>(true);
 
   const { data: geoCodeData } = useQuery({
     queryKey: ["geocode", location],
