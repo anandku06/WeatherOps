@@ -1,21 +1,33 @@
 import { getAirPollution } from "@/api";
 import type { Coords } from "../types";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import React, { Suspense } from "react";
+import React, { Suspense, type Dispatch, type SetStateAction } from "react";
 import Card from "./cards/Card";
 import { Slider } from "./ui/slider";
 import clsx from "clsx";
 import Information from "/src/assets/information.svg?react";
+import ChevronLeft from "/src/assets/ChevronLeft.svg?react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
 type Props = {
   coords: Coords;
+  isSidePanelOpen: boolean;
+  setIsSidePanelOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 export default function SidePanel(props: Props) {
+  const { isSidePanelOpen, setIsSidePanelOpen } = props;
   return (
     <>
-      <div className="fixed top-0 right-0 h-screen w-90 shadow-md bg-sidebar z-1001 py-8 px-4 overflow-y-scroll">
+      <div
+        className={clsx(
+          "fixed top-0 right-0 h-screen w-90 shadow-md bg-sidebar z-1001 py-8 px-4 overflow-y-scroll transition-transform duration-300",
+          isSidePanelOpen ? "translate-x-0" : "translate-x-full"
+        )}
+      >
+        <button onClick={() => setIsSidePanelOpen(false)}>
+          <ChevronLeft className="size-8 invert -ml-2" />
+        </button>
         <Suspense>
           <AirPollution {...props} />
         </Suspense>
